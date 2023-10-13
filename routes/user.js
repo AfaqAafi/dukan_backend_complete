@@ -14,11 +14,9 @@ router.get(
 
 router.get(
   "/login",
-  passport.authenticate("google"),
   passport.authenticate("google", {
     successRedirect: process.env.FRONTEND_URL,
   })
-  
 );
 
 router.get("/logout", logout);

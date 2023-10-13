@@ -58,19 +58,18 @@ export const placeOrderOnline = asyncError(async (req, res, next) => {
     user,
   };
 
- const options = {
-   amount: Number(totalAmount) * 100,
-   currency: "INR",
- };
- const order = await instance.orders.create(options);
+  const options = {
+    amount: Number(totalAmount) * 100,
+    currency: "INR",
+  };
+  const order = await instance.orders.create(options);
 
- res.status(201).json({
-   success: true,
-   order,
-   orderOptions,
- });
+  res.status(201).json({
+    success: true,
+    order,
+    orderOptions,
+  });
 });
-
 
 export const paymentVerification = asyncError(async (req, res, next) => {
   const {
@@ -110,11 +109,6 @@ export const paymentVerification = asyncError(async (req, res, next) => {
     return next(new ErrorHandler("Payment Failed", 400));
   }
 });
-
-
-
-
-
 
 export const getMyOrders = asyncError(async (req, res, next) => {
   const orders = await Order.find({ user: req.user._id }).populate(
