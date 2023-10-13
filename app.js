@@ -15,19 +15,35 @@ dotenv.config({
 mongoose.set("strictQuery", false);
 const app = express();
 
+// app.use(
+//   session({
+//     secret: process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: false,
+
+//     cookie: {
+//       secure:  true,
+//       httpOnly:  true,
+//       sameSite:  "none",
+//     },
+//   })
+// );
+
+app.set("trust proxy", 1);
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
+    saveUninitialized: true,
     resave: false,
-    saveUninitialized: false,
-
+    maxAge: 1000 * 60 * 15,
     cookie: {
-      secure:  true,
-      httpOnly:  true,
-      sameSite:  "none",
+      secure: true,
     },
   })
 );
+
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(
