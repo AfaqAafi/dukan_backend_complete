@@ -3,43 +3,28 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { connectPassport } from "./utils/Provider.js";
 import session from "express-session";
+
 import cookieParser from "cookie-parser";
 import passport from "passport";
 import { errorMiddleware } from "./middlewares/errorMiddleware.js";
 import cors from 'cors';
-
-
+import createMemoryStore from "memorystore";
+const MemoryStore = createMemoryStore(session);
 dotenv.config({
   path: "./config/config.env",
 });
 mongoose.set("strictQuery", false);
 const app = express();
 
-// app.use(
-//   session({
-//     secret: process.env.SESSION_SECRET,
-//     resave: false,
-//     saveUninitialized: false,
-
-//     cookie: {
-//       secure:  true,
-//       httpOnly:  true,
-//       sameSite:  "none",
-//     },
-//   })
-// );
-
-app.set("trust proxy", 1);
-
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
-    saveUninitialized: true,
+    cookie: { maxAge: 86400000 },
+    store: new MemoryStore({
+      checkPeriod: 86400000, // prune expired entries every 24h
+    }),
     resave: false,
-    maxAge: 1000 * 60 * 15,
-    cookie: {
-      secure: true,
-    },
+    saveUninitialized: true,
+    secret: process.env.SESSION_SECRET,
   })
 );
 
