@@ -12,7 +12,11 @@ export const logout = asyncError(async (req, res, next) => {
   req.session.destroy((err) => {
     if (err) return next(err);
 
-    res.clearCookie("connect.sid");
+    res.clearCookie("connect.sid", {
+      secure: true,
+      httpOnly: true,
+      sameSite: "none",
+    });
 
     res.status(200).json({
       success: true,
