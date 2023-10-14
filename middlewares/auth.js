@@ -1,7 +1,7 @@
 import ErrorHandler from "../utils/ErrorHandler.js";
 
 export const isAuthenticated = (req, res, next) => {
-  if (!req.user) {
+  if (!token) { 
     return next(new ErrorHandler("Not logged in", 401));
   }
   next();
