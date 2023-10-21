@@ -1,7 +1,6 @@
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import passport from "passport";
 import { User } from "../models/User.js";
-
 export const connectPassport = () => {
   passport.use(
     new GoogleStrategy(
@@ -29,7 +28,6 @@ export const connectPassport = () => {
       }
     )
   );
-
   passport.serializeUser((user, done) => {
     done(null, user.id);
   });

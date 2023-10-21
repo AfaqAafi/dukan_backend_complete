@@ -4,6 +4,9 @@ import { Payment } from "../models/Payment.js";
 import { instance } from "../server.js";
 import ErrorHandler from "../utils/ErrorHandler.js";
 import crypto from "crypto";
+
+
+//! _______________________________________________________________________________________
 export const placeOrder = asyncError(async (req, res, next) => {
   const {
     shippingInfo,

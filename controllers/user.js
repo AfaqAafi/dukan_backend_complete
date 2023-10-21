@@ -1,22 +1,25 @@
 import { asyncError } from "../middlewares/errorMiddleware.js";
 import { Order } from "../models/Order.js";
 import { User } from "../models/User.js";
+
+
+
+//! ----------------------------------------------------------------------------------------
 export const getMyProfile = asyncError(async (req, res, next) => {
+  // console.log(req.user._id);
   res.status(200).json({
     success: true,
     user: req.user,
+    message: "User Profile",
   });
 });
+
 
 export const logout = asyncError(async (req, res, next) => {
   req.session.destroy((err) => {
     if (err) return next(err);
 
-    res.clearCookie("connect.sid", {
-      secure: true,
-      httpOnly: true,
-      sameSite: "none",
-    });
+    res.clearCookie("connect.sid");
 
     res.status(200).json({
       success: true,

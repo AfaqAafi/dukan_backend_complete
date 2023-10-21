@@ -22,10 +22,12 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: 86400000 },
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 86400000,
+    },
     store: new MemoryStore({
-      checkPeriod: 86400000, 
+      checkPeriod: 86400000,
     }),
   })
 );
@@ -35,7 +37,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: process.env.FRONTEND_URL,
+    origin: "http://localhost:3000",
     methods: ["GET", "PUT", "POST", "DELETE"],
   })
 );

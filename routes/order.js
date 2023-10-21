@@ -4,7 +4,7 @@ import { getAdminOrders, getMyOrders, getOrdersDetails, paymentVerification, pla
 
 const router = express.Router();
 
-router.post("/createorder",isAuthenticated, placeOrder);
+router.post("/createorder", placeOrder);
 router.post("/createorderonline", isAuthenticated, placeOrderOnline);
 router.post("/paymentverification", isAuthenticated, paymentVerification);
 router.get("/myorders", isAuthenticated, getMyOrders);

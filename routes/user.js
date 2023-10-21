@@ -8,7 +8,7 @@ const router = express.Router();
 router.get(
   "/googlelogin",
   passport.authenticate("google", {
-    scope: ["profile", "email"],
+    scope: ["profile"],
   })
 );
 
@@ -16,6 +16,7 @@ router.get(
   "/login",
   passport.authenticate("google", {
     successRedirect: "http://localhost:3000",
+    failureRedirect: "http://localhost:3000/login",
   })
 );
 
